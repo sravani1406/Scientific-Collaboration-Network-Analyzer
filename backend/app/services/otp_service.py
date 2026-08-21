@@ -26,7 +26,11 @@ async def generate_and_send_otp(db: Session, user: User):
             body=f"Your verification code is {code}. It expires in {OTP_EXPIRY_MINUTES} minutes. If you didn't request this, you can ignore this email.",
         )
     except Exception as e:
-        print("OTP email sending failed:", e)
+        print("OTP email sending failed:", repr(e))
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to send OTP email."
+        )
 
 
 def verify_otp(db: Session, user_id: int, code: str) -> bool:
