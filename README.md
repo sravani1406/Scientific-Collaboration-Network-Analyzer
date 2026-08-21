@@ -10,6 +10,12 @@ suite.
 
 ---
 
+## 🚀 Live Demo
+
+[Scientific Collaboration Network Analyzer](https://scientific-collaboration-frontend.onrender.com)
+
+---
+
 ## Table of Contents
 
 1. [Features](#features)
