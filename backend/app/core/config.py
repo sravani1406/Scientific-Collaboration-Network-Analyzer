@@ -17,13 +17,8 @@ class Settings(BaseSettings):
     CLOUDINARY_API_SECRET: str
 
     # Email Settings
-    MAIL_USERNAME: str
-    MAIL_PASSWORD: str
+    RESEND_API_KEY: str
     MAIL_FROM: str
-    MAIL_SERVER: str
-    MAIL_PORT: int
-    MAIL_STARTTLS: bool
-    MAIL_SSL_TLS: bool
 
     model_config = SettingsConfigDict(
         env_file=".env",
