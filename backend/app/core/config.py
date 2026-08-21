@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     CLOUDINARY_API_SECRET: str
 
     # Email Settings
-    RESEND_API_KEY: str
+    BREVO_API_KEY: str
     MAIL_FROM: str
 
     model_config = SettingsConfigDict(

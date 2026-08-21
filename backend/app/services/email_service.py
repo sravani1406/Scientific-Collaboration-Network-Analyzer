@@ -1,9 +1,13 @@
-import resend
+from brevo import AsyncBrevo
+from brevo.transactional_emails import (
+    SendTransacEmailRequestSender,
+    SendTransacEmailRequestToItem,
+)
 
 from app.core.config import settings
 
 
-resend.api_key = settings.RESEND_API_KEY
+client = AsyncBrevo(api_key=settings.BREVO_API_KEY)
 
 
 async def send_email(
@@ -11,11 +15,18 @@ async def send_email(
     subject: str,
     body: str,
 ):
-    params: resend.Emails.SendParams = {
-        "from": settings.MAIL_FROM,
-        "to": [recipient],
-        "subject": subject,
-        "html": f"<p>{body}</p>",
-    }
+    result = await client.transactional_emails.send_transac_email(
+        subject=subject,
+        text_content=body,
+        sender=SendTransacEmailRequestSender(
+            name="SciConnect",
+            email=settings.MAIL_FROM,
+        ),
+        to=[
+            SendTransacEmailRequestToItem(
+                email=recipient,
+            )
+        ],
+    )
 
-    return await resend.Emails.send_async(params)
+    print("Brevo email sent successfully:", result.message_id)
